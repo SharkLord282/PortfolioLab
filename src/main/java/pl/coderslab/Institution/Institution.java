@@ -1,4 +1,4 @@
-package pl.coderslab.category;
+package pl.coderslab.Institution;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,21 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Category {
+public class Institution {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+    private String descriptionn;
 
-    public Category( String name) {
-
+    public Institution(String name, String descriptionn) {
         this.name = name;
+        this.descriptionn = descriptionn;
     }
 
-
-    public Category() {
+    public Institution() {
     }
 
     public Long getId() {
@@ -37,5 +37,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescriptionn() {
+        return descriptionn;
+    }
+
+    public void setDescriptionn(String descriptionn) {
+        this.descriptionn = descriptionn;
     }
 }

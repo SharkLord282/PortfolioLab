@@ -1,4 +1,4 @@
-package pl.coderslab.category;
+package pl.coderslab.charity.category;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +13,7 @@ public class Category {
     private Long id;
 
     private String name;
+
 
     public Category( String name) {
 

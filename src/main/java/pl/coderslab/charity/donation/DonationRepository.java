@@ -1,8 +1,10 @@
-package pl.coderslab.donation;
+package pl.coderslab.charity.donation;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@SpringBootApplication
+
+@Repository
 public interface DonationRepository extends JpaRepository<Donation,Long> {
 }

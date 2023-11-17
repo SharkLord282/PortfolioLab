@@ -1,7 +1,8 @@
-package pl.coderslab.donation;
+package pl.coderslab.charity.donation;
 
-import pl.coderslab.Institution.Institution;
-import pl.coderslab.category.Category;
+
+import pl.coderslab.charity.Institution.Institution;
+import pl.coderslab.charity.category.Category;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package pl.coderslab.Institution;
+package pl.coderslab.charity.Institution;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +21,12 @@ public class Institution {
     }
 
     public Institution() {
+    }
+
+    public Institution(Long id, String name, String descriptionn) {
+        this.id = id;
+        this.name = name;
+        this.descriptionn = descriptionn;
     }
 
     public Long getId() {

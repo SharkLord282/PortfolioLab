@@ -1,3 +1,4 @@
+
 <footer>
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
@@ -21,6 +22,4 @@
     </div>
 </footer>
 
-<script src="<c:url value="resources/js/app.js"/>"></script>
-</body>
-</html>
+

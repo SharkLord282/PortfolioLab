@@ -13,20 +13,20 @@ public class Institution {
     private Long id;
 
     private String name;
-    private String descriptionn;
+    private String description;
 
-    public Institution(String name, String descriptionn) {
+    public Institution(String name, String description) {
         this.name = name;
-        this.descriptionn = descriptionn;
+        this.description =description;
     }
 
     public Institution() {
     }
 
-    public Institution(Long id, String name, String descriptionn) {
+    public Institution(Long id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.descriptionn = descriptionn;
+        this.description = description;
     }
 
     public Long getId() {
@@ -45,11 +45,20 @@ public class Institution {
         this.name = name;
     }
 
-    public String getDescriptionn() {
-        return descriptionn;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptionn(String descriptionn) {
-        this.descriptionn = descriptionn;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Institution{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", descriptionn='" + description + '\'' +
+                '}';
     }
 }

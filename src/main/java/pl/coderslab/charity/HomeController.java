@@ -3,6 +3,7 @@ package pl.coderslab.charity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.Institution.InstitutionRepository;
 
@@ -20,10 +21,9 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String homeAction(Model model){
-        String[] array = {"Lol","lel"};
-        model.addAttribute("fundations", array );
+        model.addAttribute("fundations", institutionRepository.findAll());
         return "index";
     }
 }

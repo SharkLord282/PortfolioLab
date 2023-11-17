@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -86,9 +87,20 @@
 
         <ul class="help--slides-items">
 
-          <c:forEach var="fundation" items="${fun}">
-              <p>${fundation}</p>
-          </c:forEach>
+
+              <c:forEach var="number" begin="0" end="${fn:length(fundations) - 1}" step="2">
+                  <li>
+                      <c:forEach var="index" begin="${number}" end="${number + 1}">
+                          <c:if test="${index le fn:length(fundations) - 1}">
+                              <div class="col">
+                                  <div class="title">${fundations[index].name}</div>
+                                  <div class="subtitle">${fundations[index].description}</div>
+                              </div>
+                          </c:if>
+                      </c:forEach>
+                  </li>
+              </c:forEach>
+
 
         </ul>
     </div>

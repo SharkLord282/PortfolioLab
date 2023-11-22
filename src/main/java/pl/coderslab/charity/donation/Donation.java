@@ -41,7 +41,10 @@ public class Donation {
     private LocalTime pickUpTime;
     private String pickUpComment;
 
-    public Donation(Integer quantity, List<Category> categories, Institution institution, String street, String city, String zipCode, LocalDate pickUpDate, LocalTime pickUpTime, String pickUpComment) {
+    private String phoneNumber;
+
+    public Donation(Long id, Integer quantity, List<Category> categories, Institution institution, String street, String city, String zipCode, LocalDate pickUpDate, LocalTime pickUpTime, String pickUpComment, String phoneNumber) {
+        this.id = id;
         this.quantity = quantity;
         this.categories = categories;
         this.institution = institution;
@@ -51,6 +54,7 @@ public class Donation {
         this.pickUpDate = pickUpDate;
         this.pickUpTime = pickUpTime;
         this.pickUpComment = pickUpComment;
+        this.phoneNumber = phoneNumber;
     }
 
     public Donation(){
@@ -134,5 +138,31 @@ public class Donation {
 
     public void setPickUpComment(String pickUpComment) {
         this.pickUpComment = pickUpComment;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Donation{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", categories=" + categories +
+                ", institution=" + institution +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", pickUpDate=" + pickUpDate +
+                ", pickUpTime=" + pickUpTime +
+                ", pickUpComment='" + pickUpComment + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

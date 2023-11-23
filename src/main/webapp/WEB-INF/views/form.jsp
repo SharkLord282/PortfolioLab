@@ -167,22 +167,22 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input type="text" path="street" /> </label>
+                            <label> Ulica <form:input type="text" path="street" id="formStreet" /> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <form:input type="text" path="city" /> </label>
+                            <label> Miasto <form:input type="text" path="city" id="formCity"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input type="text" path="zipCode" />
+                                Kod pocztowy <form:input type="text" path="zipCode" id="formZipCode"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <form:input type="phone" path="phoneNumber" />
+                                Numer telefonu <form:input type="phone" path="phoneNumber" id="formPhoneNumber" />
                             </label>
                         </div>
                     </div>
@@ -190,17 +190,17 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <form:input type="date" path="pickUpDate" pattern="yyyy-MM-dd" /> </label>
+                            <label> Data <form:input type="date" path="pickUpDate" pattern="yyyy-MM-dd" id="formDate" /> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input type="time" path="pickUpTime" /> </label>
+                            <label> Godzina <form:input type="time" path="pickUpTime" id="formTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <form:textarea path="pickUpComment" rows="5"></form:textarea>
+                                <form:textarea path="pickUpComment" rows="5" id="formComment"/>
                             </label>
                         </div>
                     </div>
@@ -221,15 +221,13 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text " id="summaryCategory"></span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                <span class="summary--text" id="summaryInstitution"
+                                ></span
                                 >
                             </li>
                         </ul>
@@ -239,19 +237,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li id="summaryStreet">Prosta 51</li>
+                                <li id="summaryCity">Warszawa</li>
+                                <li id="summaryZipCode">99-098</li>
+                                <li id="summaryPhoneNumber">123 456 789</li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="summaryDate">13/12/2018</li>
+                                <li id="summaryTime">15:40</li>
+                                <li id="summaryComment">Brak uwag</li>
                             </ul>
                         </div>
                     </div>
@@ -265,43 +263,7 @@
         </form:form>
     </div>
 </section>
-
-<footer>
-    <div class="contact">
-        <h2>Skontaktuj się z nami</h2>
-        <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
-            <div class="form-group form-group--50">
-                <input type="text" name="name" placeholder="Imię" />
-            </div>
-            <div class="form-group form-group--50">
-                <input type="text" name="surname" placeholder="Nazwisko" />
-            </div>
-
-            <div class="form-group">
-            <textarea
-                    name="message"
-                    placeholder="Wiadomość"
-                    rows="1"
-            ></textarea>
-            </div>
-
-            <button class="btn" type="submit">Wyślij</button>
-        </form>
-    </div>
-    <div class="bottom-line">
-        <span class="bottom-line--copy">Copyright &copy; 2018</span>
-        <div class="bottom-line--icons">
-            <a href="#" class="btn btn--small"
-            ><img src="images/icon-facebook.svg"
-            /></a>
-            <a href="#" class="btn btn--small"
-            ><img src="images/icon-instagram.svg"
-            /></a>
-        </div>
-    </div>
-</footer>
-
+<jsp:include page="footer.jsp" />
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>

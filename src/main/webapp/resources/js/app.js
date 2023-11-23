@@ -164,6 +164,60 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+
+      if (this.$step.innerText == 5) {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+        const spanElements = checkedCheckboxes.map(checkbox => {
+          const label = checkbox.closest('label');
+          return label.querySelector('.description');
+        });
+
+        const summaryCategory = document.getElementById("summaryCategory")
+
+        let categories = ""
+        spanElements.forEach(element => {
+          categories = categories + element.innerText
+          summaryCategory.innerText = categories
+        });
+
+        const summaryInstitution = document.getElementById("summaryInstitution")
+        const checkedCheckbox = document.querySelector('[data-step="3"] input[type="radio"]:checked');
+        const institutionName = checkedCheckbox.closest('.form-group--checkbox').querySelector('.title');
+
+        summaryInstitution.innerText = 'Dla fundacji "' + institutionName.innerText +'"'
+
+        const summaryStreet = document.getElementById("summaryStreet");
+        const summaryCity  = document.getElementById("summaryCity")
+        const summaryZipCode = document.getElementById("summaryZipCode")
+        const summaryPhoneNumber = document.getElementById("summaryPhoneNumber")
+        const summaryDate = document.getElementById("summaryDate")
+        const summaryTime = document.getElementById("summaryTime")
+        const summaryComment = document.getElementById("summaryComment")
+
+        const formStreet = document.getElementById("formStreet");
+        const formCity = document.getElementById("formCity")
+        const formZipCode =document.getElementById("formZipCode")
+        const formPhoneNumber =  document.getElementById("formPhoneNumber")
+        const formDate = document.getElementById("formDate")
+        const formTime = document.getElementById("formTime")
+        const formComment = document.getElementById("formComment")
+
+        summaryStreet.innerText = formStreet.value;
+        summaryCity.innerText = formCity.value;
+        summaryZipCode.innerText = formZipCode.value;
+        summaryPhoneNumber.innerText = formPhoneNumber.value;
+        summaryDate.innerText = formDate.value;
+        summaryTime.innerText = formTime.value;
+        summaryComment.innerText = formComment.value;
+
+      }
+
+
+
+
+
+
     }
 
   }

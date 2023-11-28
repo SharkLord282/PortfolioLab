@@ -1,12 +1,20 @@
 package pl.coderslab.charity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.charity.Institution.InstitutionRepository;
 import pl.coderslab.charity.category.CategoryRepository;
 import pl.coderslab.charity.donation.DonationRepository;
+import pl.coderslab.charity.users.User;
+import pl.coderslab.charity.users.UserService;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -15,12 +23,16 @@ public class HomeController {
     private final InstitutionRepository institutionRepository;
     private final CategoryRepository categoryRepository;
     private final DonationRepository donationRepository;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public HomeController(InstitutionRepository institutionRepository, CategoryRepository categoryRepository, DonationRepository donationRepository) {
+    public HomeController(InstitutionRepository institutionRepository, CategoryRepository categoryRepository, DonationRepository donationRepository, UserService userService, PasswordEncoder passwordEncoder) {
         this.institutionRepository = institutionRepository;
         this.categoryRepository = categoryRepository;
         this.donationRepository = donationRepository;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -31,4 +43,51 @@ public class HomeController {
         model.addAttribute("sumOfGifts", donationRepository.sumOfGifts());
         return "index";
     }
+
+    @GetMapping("/login")
+    public String getLogin(Model model){
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/register")
+    public String registrationForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
+
+        if (userService.findByUsername(user.getUsername()) != null) {
+            bindingResult.rejectValue("username", "error.user", "Użytkownik o podanej nazwie już istnieje");
+            return "register";
+        }
+
+
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
+        userService.saveUser(user);
+
+        return "redirect:/login?registrationSuccess";
+    }
+
+
+
 }

@@ -30,46 +30,29 @@
             <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
-
-    <link rel="stylesheet" href="<c:url value='css/style.css'/>"/>
 </header>
 
 <section class="login-page">
-    <h2>Załóż konto</h2>
-    <form:form action="${pageContext.request.contextPath}/register" method="post"  modelAttribute="user" >
+    <h2>Zaloguj się</h2>
+    <c:if test="${param.error != null}">
+        <p style="color: red;">Błąd logowania. ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}</p>
+    </c:if>
+    <form:form action="${pageContext.request.contextPath}/login" method="post"  modelAttribute="user">>
         <div class="form-group">
             <form:input type="email" path="username" placeholder="Email" />
         </div>
         <div class="form-group">
             <form:input type="password" path="password" placeholder="Hasło" />
+            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
-        <div class="form-group">
-            <input type="password" name="password2" placeholder="Powtórz hasło" />
-        </div>
-        <form:input path="enabled" value="true" />
 
         <div class="form-group form-group--buttons">
-            <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
-            <button class="btn" type="submit">Załóż konto</button>
+            <a href="#" class="btn btn--without-border">Załóż konto</a>
+            <button class="btn" type="submit">Zaloguj się</button>
         </div>
     </form:form>
 </section>
 
 <jsp:include page="footer.jsp" />
-
-
-<script>
-    function validatePassword() {
-        var password1 = document.getElementsByName("password")[0].value;
-        var password2 = document.getElementsByName("password2")[0].value;
-
-        if (password1 !== password2) {
-            alert("Hasła nie są identyczne.");
-            return false;
-        }
-
-        return true;
-    }
-</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package pl.coderslab.charity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,10 @@ import pl.coderslab.charity.category.CategoryRepository;
 import pl.coderslab.charity.donation.DonationRepository;
 import pl.coderslab.charity.users.User;
 import pl.coderslab.charity.users.UserService;
+import org.springframework.security.core.Authentication;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 
 @Controller
@@ -37,10 +40,29 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String homeAction(Model model){
+    public String homeAction(Model model, Authentication authentication){
+        if (authentication != null && authentication.isAuthenticated()) {
+
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof UserDetails) {
+
+                UserDetails userDetails = (UserDetails) principal;
+
+
+                String username = userDetails.getUsername();
+                model.addAttribute("loggedUser", true);
+                model.addAttribute("username", username);
+            }
+        } else {
+
+            model.addAttribute("loggedUser", false);
+        }
+
         model.addAttribute("fundations", institutionRepository.findAll());
         model.addAttribute("numberOfDonatedBags",donationRepository.sumAllDonatedBags());
         model.addAttribute("sumOfGifts", donationRepository.sumOfGifts());
+
         return "index";
     }
 
@@ -57,7 +79,7 @@ public class HomeController {
         }
 
 
-        return "redirect:/";
+        return "redirect:/form";
     }
 
     @GetMapping("/register")
@@ -87,6 +109,8 @@ public class HomeController {
 
         return "redirect:/login?registrationSuccess";
     }
+
+
 
 
 

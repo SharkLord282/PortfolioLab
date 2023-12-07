@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
-@Repository
+
 public interface DonationRepository extends JpaRepository<Donation,Long> {
 
-    @Query(value = "SELECT SUM(quantity) FROM donation", nativeQuery = true)
+    @Query("SELECT SUM(d.quantity) FROM Donation d")
     Integer sumAllDonatedBags();
 
-    @Query(value = "SELECT COUNT(*) FROM donation WHERE quantity IS NOT NULL", nativeQuery = true)
+    @Query("SELECT COUNT(d) FROM Donation d WHERE d.quantity IS NOT NULL")
     Integer sumOfGifts();
 }
